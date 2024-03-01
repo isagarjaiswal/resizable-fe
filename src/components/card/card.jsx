@@ -1,30 +1,49 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./cards.css";
-const Card = () => {
-  const handleAdd = () => {
-    // onAdd(inputThought);
-    // setInputThought('');
+import { addData } from "../../api/api";
+
+const Card = ({ setIsUpdated, isUpdated }) => {
+  const [text, setText] = useState("Add Text here");
+  const [isEditable, setIsEditable] = useState(false);
+  const textRef = useRef(null);
+
+  const handleAdd = async () => {
+    if (text && isEditable) {
+      const status = await addData({ content: text });
+      if (status === 200) {
+        setText("Add Text here");
+        setIsEditable(false);
+      }
+    }
+    setIsUpdated(!isUpdated);
   };
 
-  const handleUpdate = () => {
-    // onUpdate(inputThought);
-    // setInputThought('');
+  const handleNew = async () => {
+    setText("");
+    setIsEditable(true);
   };
-  const handleShowCount = () => {};
+
   return (
     <div className="card">
       <div className="card-body">
-        <h2 className="card-title">Thought Card</h2>
-        <p className="card-text">Lorem ipsum dolor sit amet.</p>
+        <div
+          ref={textRef}
+          contentEditable={isEditable}
+          onBlur={(e) => setText(e.target.textContent)}
+          suppressContentEditableWarning={true}
+          className={`card-text ${isEditable && "border"}`}
+        >
+          {text}
+        </div>
         <div className="button-container">
-          <button onClick={handleAdd} className="btn btn-primary">
+          <button
+            onClick={handleAdd}
+            className={`btn btn-primary ${!isEditable && "not-allowed"}`}
+          >
             Add
           </button>
-          <button onClick={handleUpdate} className="btn btn-success">
-            Update
-          </button>
-          <button onClick={handleShowCount} className="btn btn-info">
-            Count
+          <button onClick={handleNew} className="btn btn-primary">
+            New
           </button>
         </div>
       </div>

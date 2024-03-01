@@ -1,0 +1,14 @@
+.chip {
+  background-color: rgba(128, 128, 128, 0.258);
+  border: 1px solid white;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.border {
+  border: 1px solid red;
+  padding: 10px;
+}

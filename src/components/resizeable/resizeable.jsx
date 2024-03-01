@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SampleSplitter from "../splitter/splitter";
 import { useResizable } from "react-resizable-layout";
 import "./resizeable.css";
 import Card from "../card/card";
+import CountCard from "../count/countCard";
+import DataList from "../dataList/dataList";
 
 const Resizeable = () => {
+  const [isUpdated, setIsUpdated] = useState(false);
   const {
     isDragging: isTerminalDragging,
     position: terminalH,
@@ -30,11 +33,13 @@ const Resizeable = () => {
     splitterProps: pluginDragBarProps,
   } = useResizable({
     axis: "x",
-    initial: 200,
+    initial: 250,
     min: 50,
     reverse: true,
   });
-
+  useEffect(() => {
+    console.log({ isUpdated });
+  }, [isUpdated]);
   return (
     <div
       className={
@@ -46,7 +51,7 @@ const Resizeable = () => {
           className={`shrink-0 contents, ${isFileDragging && "dragging"} `}
           style={{ width: fileW }}
         >
-          <Card />
+          <Card setIsUpdated={setIsUpdated}  isUpdated={isUpdated}/>
         </div>
         <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
         <div className={"flex grow"}>
@@ -54,7 +59,7 @@ const Resizeable = () => {
             className={`shrink-0 contents, ${isPluginDragging && "dragging"} `}
             style={{ width: pluginW }}
           >
-            <Card />
+            <DataList isUpdated={isUpdated}/>
           </div>
         </div>
       </div>
@@ -68,7 +73,7 @@ const Resizeable = () => {
         className={`shrink-0 contents, ${isTerminalDragging && "dragging"} `}
         style={{ height: terminalH }}
       >
-        <Card />
+        <CountCard isUpdated={isUpdated} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .card {
-  width: 100%;
+  width: 90%;
   height: 100%;
   padding: 10px;
 }
@@ -42,12 +42,15 @@
   background-color: #218838;
 }
 
-.btn-info {
-  background-color: #17a2b8;
-  color: #fff;
-  border: none;
+.not-allowed {
+  pointer-events: auto !important;
+  cursor: not-allowed !important;
+  background-color: red;
 }
-
-.btn-info:hover {
-  background-color: #138496;
+.not-allowed:hover {
+  background-color: red;
+}
+.border {
+  border: 1px solid red;
+  padding: 10px;
 }
