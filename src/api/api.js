@@ -1,9 +1,9 @@
 import axios from "axios";
-
+const apiUrl = process.env.REACT_APP_API_URL;
 // Function to add data
 export async function addData(data) {
   try {
-    const response = await axios.post("http://localhost:5500/api/add", data);
+    const response = await axios.post(`${apiUrl}add`, data);
     return response.status;
   } catch (error) {
     console.error("Error adding data:", error); // Log error with clear message
@@ -13,7 +13,7 @@ export async function addData(data) {
 // Function to update data
 export async function updateData(data) {
   try {
-    const response = await axios.put("http://localhost:5500/api/update", data);
+    const response = await axios.put(`${apiUrl}update`, data);
     console.log({ a: response.data }); // Log response data for debugging purposes
   } catch (error) {
     console.error("Error updating data:", error.response.data); // Log error with clear message and include response data
@@ -23,7 +23,7 @@ export async function updateData(data) {
 // Function to get counts
 export async function getCounts() {
   try {
-    const response = await axios.get("http://localhost:5500/api/count");
+    const response = await axios.get(`${apiUrl}count`);
     console.log(response.data); // Log counts from the server for debugging purposes
     return response.data; // Return counts from the server
   } catch (error) {
@@ -34,7 +34,7 @@ export async function getCounts() {
 // Function to get all data
 export async function getAllData() {
   try {
-    const response = await axios.get("http://localhost:5500/api/allEntries");
+    const response = await axios.get(`${apiUrl}allEntries`);
     console.log(response.data); // Log all entries from the server for debugging purposes
     return response.data; // Return all entries from the server
   } catch (error) {
