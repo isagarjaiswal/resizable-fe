@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const apiUrl = process.env.REACT_APP_API_URL;
-const apiUrl = "http://localhost:5500/";
+const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = "http://localhost:5500/";
 
 export async function addData(data) {
   try {
