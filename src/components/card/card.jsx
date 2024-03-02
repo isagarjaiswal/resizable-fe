@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./cards.css";
 import { addData } from "../../api/api";
 
-const Card = ({ setIsUpdated, isUpdated }) => {
+const Card = ({ setIsUpdated }) => {
   const [text, setText] = useState("Add Text here");
   const [isEditable, setIsEditable] = useState(false);
   const textRef = useRef(null);
@@ -15,7 +15,7 @@ const Card = ({ setIsUpdated, isUpdated }) => {
         setIsEditable(false);
       }
     }
-    setIsUpdated(!isUpdated);
+    setIsUpdated((prev) => !prev);
   };
 
   const handleNew = async () => {

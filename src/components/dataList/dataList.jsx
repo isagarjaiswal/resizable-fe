@@ -2,40 +2,36 @@ import React, { useState, useEffect } from "react";
 import { getAllData, updateData } from "../../api/api";
 import "./dataList.css";
 
-const DataList = ({ isUpdated }) => {
-  const [data, setData] = useState([]); // State to store fetched data
-  const [isEditable, setIsEditable] = useState(false); // State to manage edit mode
+const DataList = ({ isUpdated, setIsUpdated }) => {
+  const [data, setData] = useState([]);
+  const [isEditable, setIsEditable] = useState(false);
   const [text, setText] = useState("");
   useEffect(() => {
-    // Function to fetch data when component mounts
     const fetchData = async () => {
       try {
-        const responseData = await getAllData(); // Fetching all data from the API
-        setData(responseData?.data || []); // Setting fetched data to state
+        const responseData = await getAllData();
+        setData(responseData?.data || []);
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Handle error if needed
       }
     };
 
-    fetchData(); // Invoking fetchData function
+    fetchData();
 
-    // Clean-up function (optional)
     return () => {
-      // Perform any clean-up (if required)
+
     };
-  }, [isUpdated]);
+  }, [isUpdated, data]);
 
   const handleUpdate = async ({ _id }) => {
-    setIsEditable((prev) => !prev); // Toggling edit mode
+    setIsEditable((prev) => !prev);
 
-    if (!isEditable && text) {
-      // Checking if edit mode is enabled
+    if (isEditable && text) {
       try {
-        await updateData({ content: text, _id }); // Calling API to update data
+        setIsUpdated((prev) => !prev);
+        await updateData({ content: text, _id });
       } catch (error) {
         console.error("Error updating data:", error);
-        // Handle error if needed
       }
     }
   };

@@ -37,9 +37,7 @@ const Resizeable = () => {
     min: 50,
     reverse: true,
   });
-  useEffect(() => {
-    console.log({ isUpdated });
-  }, [isUpdated]);
+
   return (
     <div
       className={
@@ -51,7 +49,7 @@ const Resizeable = () => {
           className={`shrink-0 contents, ${isFileDragging && "dragging"} `}
           style={{ width: fileW }}
         >
-          <Card setIsUpdated={setIsUpdated}  isUpdated={isUpdated}/>
+          <Card setIsUpdated={setIsUpdated} />
         </div>
         <SampleSplitter isDragging={isFileDragging} {...fileDragBarProps} />
         <div className={"flex grow"}>
@@ -59,7 +57,7 @@ const Resizeable = () => {
             className={`shrink-0 contents, ${isPluginDragging && "dragging"} `}
             style={{ width: pluginW }}
           >
-            <DataList isUpdated={isUpdated}/>
+            <DataList setIsUpdated={setIsUpdated} isUpdated={isUpdated} />
           </div>
         </div>
       </div>
