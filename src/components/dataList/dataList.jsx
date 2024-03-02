@@ -18,10 +18,8 @@ const DataList = ({ isUpdated, setIsUpdated }) => {
 
     fetchData();
 
-    return () => {
-
-    };
-  }, [isUpdated, data]);
+    return () => {};
+  }, [isUpdated]);
 
   const handleUpdate = async ({ _id }) => {
     setIsEditable((prev) => !prev);
