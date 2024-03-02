@@ -14,7 +14,6 @@ const CountCard = ({ isUpdated }) => {
         console.error("Error fetching counts:", error);
       }
     }
-
     fetchData();
   }, [isUpdated]);
 
